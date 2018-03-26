@@ -1,0 +1,12 @@
+
+{
+    "name": "monaid/AsciiArt",
+    "type": "library",
+    "description": "Ascii Art generator Skell",
+     "autoload": {
+        "psr-4": {
+            "AsciiArt\\": "src/"
+        }
+
+    }
+}
