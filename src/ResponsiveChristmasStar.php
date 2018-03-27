@@ -18,7 +18,12 @@ class ResponsiveChristmasStar extends ChristmasStar {
     protected function generateMatrix() {
       $size = $this->actualsize;
       if ($size !== 11){
-     	return ChristmasStar::generateMatrix();
+      /* ugly hack */
+        $star = new  ChristmasStar();
+        if ($this->output)  $star->setOutput($this->output);
+        $flip = array_flip($this->sizes);
+        $star->setSize($flip[$size]);
+        return $star->getCachedMatrix($size);      
       }
       else {
         $matrix = new \SplFixedArray($size);

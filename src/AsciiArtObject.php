@@ -11,7 +11,7 @@ abstract class AsciiArtObject {
   /**
   *	@var array[string]integer available heights
   */
-  private $sizes = ['s' => 5, 'm' => 7, 'l'=> 11, 'large' => 11, 'medium' => 7, 'small' => 5];  
+  protected $sizes = ['s' => 5, 'm' => 7, 'l'=> 11, 'large' => 11, 'medium' => 7, 'small' => 5];  
   
   /**
   *	@protected integer $linenumber actual y martix value 
@@ -50,7 +50,14 @@ abstract class AsciiArtObject {
 	if (! isset($this->cached[$this->actualsize])) $this->cached[$this->actualsize] = $this->generateMatrix();
 	return $this;
   }
- 
+  /**
+  *	@param integer $size  matrix with size requested
+  *	@return   \SplFixedArray[\SplFixedArray[string]] | false 
+  */
+  public function getCachedMatrix($size){
+	if ($this->cached[$size]) return $this->cached[$size];
+	return false;
+ }
  /**
   *	@param OutputInterface $output 
   *	@return self
