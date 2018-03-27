@@ -40,7 +40,7 @@ class ChristmasStar extends AsciiArtObject {
     *	@param  string 	character using to paint the shape  
     *	@return \SplFixedArray[string] 
     */
-    private function getLine($n, $char="*" ){
+    protected function getLine($n, $char="*" ){
 	$line  = new \SplFixedArray($this->dimensions[$this->actualsize] );
 	$width = $this->calculateLength($n);
 	$offset = (($this->dimensions[$this->actualsize] - $width)/ 2);
@@ -55,7 +55,7 @@ class ChristmasStar extends AsciiArtObject {
     *	@param  integer the line number 
     *	@return integer width of the tree in the current line
     */
-    private function calculateLength($n){ 
+    protected function calculateLength($n){ 
 	if ($n <= $this->middle) return ((4 * ($n - 1)) + 1);
     	return  ($this->dimensions[$this->actualsize] -2 )-  (($n -  $this->middle) *4  ) ; 
  	
