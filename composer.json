@@ -5,7 +5,7 @@
     "description": "Ascii Art generator Skell",
      "autoload": {
         "psr-4": {
-            "AsciiArt\\": "src/"
+            "monaid\AsciiArt\\": "src/"
         }
 
     }
