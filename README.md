@@ -19,14 +19,16 @@ Just put something like following to your local composer.json
 
 ```
 
-an run 
+an run the Install from not development packages like PHPunit  
 
 ```
-# composer update
+# composer update --no-dev 
+
+
 
 ```
 
-### Using
+### Usage
 
 load package
 ```
@@ -38,25 +40,46 @@ use \monaid\AsciiArt as Ascii;
 ```
 
 
-Create your Objects
+Create the Objects
 ```
-$christmasTree = new Ascii\ChristmasTree();
-$christmasStar = new Ascii\ResponsiveChristmasStar();
+$c = new Ascii\AsciiArt();
+
  ```
-and the OutputObjects
+register shape generators
+
+```
+$c->registerGenerator('ct', new Ascii\ShapeGenerators\ChristmasTree());  
+$c->registerGenerator('rs', new Ascii\ShapeGenerators\ResponsiveChristmasStar()); 
+$c->registerGenerator('cs', new Ascii\ShapeGenerators\ChristmasStar());
 
 ```
 
-$outputToConsole = new Ascii\OutputConsole();
-$outputAsRawHTML = new Ascii\OutputRawHTML();
-$outputLikeDebug = new Ascii\OutputLikeDebug();
+define output formats
+
 ```
 
-render them
- 
+$out = new Ascii\Output\OutputLikeDebug();
+$html = new Ascii\Output\OutputRawHTML();
+$raw = new Ascii\Output\OutputConsole();
+
+
+```
+render them  raw
+  
 ``` 
-print $christmasStar->setOutput($outputToConsole)->render();
-print $christmasTree->setOutput($outputAsRawHTML)->setSize('l')->render();
-print $christmasStar->setOutput($outputLikeDebug)->setSize('s')->render();
+print $out->render($c->gen["rs"](null, 5));
+print $out->render($c->gen["cs"](null, 11));
+print $out->render($c->gen["rs"](null, 11));
+print $out->render($c->gen["ct"](null, 11));
+
+```
+
+use the human readeble translator with randowm fallback
+
+
+```
+list ($x, $y ) = $c->translateSizes();
+print $out->render($c->gen["ct"]($x, $y));
+
 ```
 
