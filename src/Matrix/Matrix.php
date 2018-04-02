@@ -16,7 +16,7 @@ class Matrix extends MatrixElement{
     public function __construct($x, $y){
 	parent::__construct($y);
 	for ($n = 0; $n < $y ; $n++){
-	    $this->data[$n] = new \SplFixedArray($x);
+	    $this->data[$n] = new MatrixColoumn($x);
 	 }
        }
        

@@ -83,3 +83,8 @@ print $out->render($c->gen["ct"]($x, $y));
 
 ```
 
+running tests
+
+```
+vendor/bin/phpunit --bootstrap  vendor/autoload.php vendor/monaid/AsciiArt/tests/
+```

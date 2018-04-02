@@ -29,10 +29,10 @@ class RawOutput  implements OutputInterface {
   * @param \monaid\AsciiArt\Matrix\MatrixColoumn $line one line if the transparent picture
   * @return string $output one renderd line 
   */ 
-  private function fillSpaces(\SplFixedArray $line){
+  private function fillSpaces(\Monaid\AsciiArt\Matrix\MatrixColoumn $line){
       $class = get_called_class();
       $output = "";
-      foreach($line->toArray() as $char) {
+      foreach($line->dump()->toArray() as $char) {
 	  $output .= ($char) ? $char : $class::SPACE;
       }
       return $output;
