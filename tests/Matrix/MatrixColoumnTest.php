@@ -78,6 +78,27 @@ class MatrixColoumnTest extends PHPUnit_Framework_TestCase {
 	  $this->assertFalse($method->invoke(self::$coloumn, "---+"));
        }
 
+/**
+*  @covers \monaid\AsciiArt\Matrix\MatrixColoumn::offsetSet
+*  @depends testConstructorSetsValidDataPropertyKey
+*/   
+      
+      public function testForDirectArrayAccessToTrue(){
+	      $this->assertEquals("*",  self::$coloumn[0] = "*");
+      }
+     
+/**
+ * @covers \monaid\AsciiArt\Matrix\MatrixColoumn::offsetSet
+*  @depends testConstructorSetsValidDataPropertyKey	
+*/   
+      
+      public function testForDirectArrayAccessToMatrixValueException(){
+	   try{
+		self::$coloumn[0] =  "s,d";
+	   }catch(\monaid\AsciiArt\Exceptions\MatrixValueException $e){	
+	      $this->assertInstanceOf('\monaid\AsciiArt\Exceptions\MatrixValueException', $e);
+ 	   }
+     }   
 
 
 }
