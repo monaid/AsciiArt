@@ -38,19 +38,26 @@ abstract class MatrixElement implements \ArrayAccess {
 *	@param	integer	$id 	array id
 *	@param 	$string $char	the character to set 
 *	@throws Ascii\Exceptions\MatrixValueException when key is unset or unvalid
+*	@throws Ascii\Exceptions\MatrixKeyNotValideException when key is not integer or out of range
+*	@throws Ascii\Exceptions\MatrixValueException when value is not valid 
 */
     public function offsetSet($offset, $value) {
 	if (is_null($offset)) {
 	    throw new Ascii\Exceptions\MatrixValueException("can't set a Matrix value, when Key ist unset"); 
         }else { 
-	   try { 
-	      if ($this->validateValue($value))  $this->data[$offset] = $value;
-	   }catch (\RuntimeException $e){
-	     throw new  Ascii\Exceptions\MatrixValueException("can't set unvalid Matrix key", Null, $e);
-	   }
-	}
+	    if ($this->validateValue($value)) {
+		  try{
+		      $this->data[$offset] = $value;
+		 }catch(\RuntimeException $e) { 
+		  throw new  Ascii\Exceptions\MatrixKeyNotValideException("the key " .$offset. " can not be used");
+		 }
+	    }	 
+	    else {
+		throw new  Ascii\Exceptions\MatrixValueException("can't set unvalid value like: " . $value);
+	      }
 	  
-             
+	 }
+            
     }
 
  
@@ -69,7 +76,7 @@ abstract class MatrixElement implements \ArrayAccess {
 	try{
 	    $this->data[$offset] = NULL;
 	}catch (\RuntimeException $e) {
-	    throw new  Ascii\Exceptions\MatrixValueException("can't unset an invalid value", Null, $e);  
+	    throw new  Ascii\Exceptions\MatrixValueException("can't unset an invalid value");  
 	}
     }
 /**

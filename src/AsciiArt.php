@@ -15,8 +15,8 @@ class AsciiArt {
 *	@protected Array[string => [integer, integer]  $availableSizes  
 */
    protected $availableSizes = [
-	's' => [null,5], 'm' =>[null, 7], 'l'=> [null, 11], 
-	'large' => [null, 11], 'medium' =>[null, 7], 'small' => [null,5]
+	'S' => [null,5], 'M' =>[null, 7], 'L'=> [null, 11], 
+	'Large' => [null, 11], 'Medium' =>[null, 7], 'Small' => [null,5]
       ]; 
       
 /**
@@ -32,7 +32,7 @@ class AsciiArt {
 *	@return bool  
 */
      public function isSizeValid($name) {
-	if (isset  ($this->availableSizes[strtolower($name)])) return true;
+	if (isset  ($this->availableSizes[$name])) return true;
 	return false;
       }
       

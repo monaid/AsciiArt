@@ -76,6 +76,17 @@ print $out->render($c->gen["ct"](null, 11));
 
 use the human readeble translator with randowm fallback
 
+for normal use:
+
+```
+
+list ($x, $y ) = $c->translateSizes('Large');
+print $out->render($c->gen["ct"]($x, $y));
+
+
+```
+
+for random use:
 
 ```
 list ($x, $y ) = $c->translateSizes();
@@ -83,8 +94,3 @@ print $out->render($c->gen["ct"]($x, $y));
 
 ```
 
-running tests
-
-```
-vendor/bin/phpunit --bootstrap  vendor/autoload.php vendor/monaid/AsciiArt/tests/
-```

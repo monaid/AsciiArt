@@ -18,7 +18,6 @@ use \monaid\AsciiArt as Ascii;
 
 $c = new Ascii\AsciiArt();
 
-
 /**
 *	register generators
 */
@@ -55,5 +54,19 @@ print $out->render($c->gen["ct"](null, 11));
 /**
 *	using translator for human readeble sizes with random fallback  	
 */
+
+/**
+*    normal use
+*/
+
+list ($x, $y ) = $c->translateSizes('Large');
+print $out->render($c->gen["ct"]($x, $y));
+
+
+/**
+*	random fallback
+*/
+
+
 list ($x, $y ) = $c->translateSizes();
 print $out->render($c->gen["ct"]($x, $y));

@@ -10,7 +10,7 @@ namespace monaid\AsciiArt\ShapeGenerators;
 /**
 *	"normal" stars are symmetric 
 *	so this is only a normalized version from some funny kind of idea of a star
-*	issue pattern  generation only works up to 15 height 
+*	
 */
 
 class ChristmasStar extends CalcShapeGenerator {
