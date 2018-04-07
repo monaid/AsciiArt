@@ -18,7 +18,7 @@ class MatrixColoumnTest extends PHPUnit_Framework_TestCase {
           }
 
 /**
-* @covers \monaid\AsciiArt\Matrix\MatrixColoumn::__construct
+* @covers \monaid\AsciiArt\Matrix\MatrixColoumn
 */       
        
       public function testConstructor(){
@@ -26,7 +26,7 @@ class MatrixColoumnTest extends PHPUnit_Framework_TestCase {
       }         
 
 /**
- * @covers \monaid\AsciiArt\Matrix\MatrixColoumn::__construct
+ * @covers \monaid\AsciiArt\Matrix\MatrixColoumn
 *  @depends testConstructor	
 */      
       
@@ -37,7 +37,7 @@ class MatrixColoumnTest extends PHPUnit_Framework_TestCase {
 	}    
 	    
 /**
- * @covers \monaid\AsciiArt\Matrix\MatrixColoumn::__construct
+ * @covers \monaid\AsciiArt\Matrix\MatrixColoumn
 *  @depends testConstructorSetsValidDataPropertyType	
 */      
      public function testConstructorSetsValidDataPropertyLength() { 
@@ -47,7 +47,7 @@ class MatrixColoumnTest extends PHPUnit_Framework_TestCase {
 	    $this->assertEquals($data->count(), 3);
      }
 /**
- * @covers \monaid\AsciiArt\Matrix\Matrix::__construct
+ * @covers \monaid\AsciiArt\Matrix\MatrixColoumn
 *  @depends testConstructorSetsValidDataPropertyLength	
 */      
      public function testConstructorSetsValidDataPropertyKey(){

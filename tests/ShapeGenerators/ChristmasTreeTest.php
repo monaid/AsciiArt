@@ -6,9 +6,6 @@ use \monaid\AsciiArt\ShapeGenerators;
 
 class ChristmasTreeTest extends PHPUnit_Framework_TestCase {
 
-
-
-
 /**
 *	@backupStaticAttributes enabled
 */ 
@@ -22,14 +19,14 @@ class ChristmasTreeTest extends PHPUnit_Framework_TestCase {
       }
   
 /**
-* 	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasTree::__construct
+* 	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasTree
 */       
        
       public function testConstructor(){
 	   $this->assertInstanceOf('\monaid\AsciiArt\ShapeGenerators\ChristmasTree', self::$christmasTree);
       } 
 /**
-* 	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasTree::calculateLength
+* 	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasTree::getHeight
 *	@depends testConstructor
 *	@dataProvider christmasTreeSizesProvider
 */ 

@@ -15,7 +15,7 @@ class BaseShapeGeneratorTest extends PHPUnit_Framework_TestCase {
   
       protected static $reflection;
       protected static $mock;
-      protected static $generator;
+     
       
      public static function setUpBeforeClass(){
 	  self::$reflection = new \ReflectionClass ('\monaid\AsciiArt\ShapeGenerators\BaseShapeGenerator');
@@ -36,7 +36,6 @@ class BaseShapeGeneratorTest extends PHPUnit_Framework_TestCase {
 	     $method->setAccessible(true);
 	     self::$mock->method('getWidth')
 	      ->will($this->returnValue(7));
-	     self::$mock->getWidth();	  
  	     $this->assertEquals($method->invoke(self::$mock, NULL, 5), [7, 5]);
      
       }
@@ -50,7 +49,6 @@ class BaseShapeGeneratorTest extends PHPUnit_Framework_TestCase {
 	    $method->setAccessible(true);
 	    self::$mock->method('getWidth')
 		->will($this->returnValue(7));
-	    self::$mock->getWidth();
 	    try{
 	      $method->invoke(self::$mock, NULL, NULL);
 	      }catch (Exception  $e){

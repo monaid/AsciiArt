@@ -31,7 +31,7 @@ class ChristmasStar extends CalcShapeGenerator {
 *	@return integer $y the corresponding height
 */   
    protected function getHeight($x){
-    
+	return (2 + (($x -1)/2));
     }
     
 /**

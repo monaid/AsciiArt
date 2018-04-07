@@ -17,7 +17,7 @@ class AsciiArtTest extends PHPUnit_Framework_TestCase {
       }
   
 /**
-* 	@covers \monaid\AsciiArt\AsciiArt::__construct
+* 	@covers \monaid\AsciiArt\AsciiArt
 */       
        
       public function testConstructor(){
