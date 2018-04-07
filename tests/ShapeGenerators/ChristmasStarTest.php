@@ -41,7 +41,7 @@ class ChristmasStarTest extends PHPUnit_Framework_TestCase {
 	  $this->assertInstanceOf('\monaid\AsciiArt\ShapeGenerators\ChristmasStar', self::$christmasStar);
       } 
 /**
-* 	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasStar::calculateLength
+* 	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasStar::getHeight
 *	@depends testConstructor
 *	@dataProvider christmasStarSizesProvider
 */ 
