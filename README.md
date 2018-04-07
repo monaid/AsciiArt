@@ -92,5 +92,9 @@ for random use:
 list ($x, $y ) = $c->translateSizes();
 print $out->render($c->gen["ct"]($x, $y));
 
+// or
+
+print $out->render($c->gen["ct"](NULL,$c->translateSizes()[1]); 
+
 ```
 
