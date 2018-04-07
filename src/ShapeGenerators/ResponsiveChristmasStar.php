@@ -14,6 +14,14 @@ class ResponsiveChristmasStar extends ChristmasStar {
 *	so here is the next try
 */
 
+/** 	@param  integer $X the given width
+*	@return integer $y the corresponding height
+*/   
+    protected function getHeight($x){
+	  if ($x < 15) return (2 + (($x -1)/2));
+ 	  return  (3 + (($x -1)/2));
+	  
+    }
 /**
 *	@param  integer $y the given height
 *	@return integer $x the corresponding width

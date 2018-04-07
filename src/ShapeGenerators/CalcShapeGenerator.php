@@ -7,9 +7,13 @@ abstract class CalcShapeGenerator extends  BaseShapeGenerator{
 
     abstract protected function getWidth($y);
     abstract protected function getHeight($x);
-    abstract protected function generateLine($n, &$matrix, $char);
+    abstract protected function generateLine($n, &$matrix);
     abstract protected function correctFields(&$matrix);
 
+/**
+*	@protected string  $char
+*/    
+      protected $char = "*";
 /**
 *	@protected integer  $offestTop 
 */ 

@@ -41,12 +41,12 @@ class ChristmasTree extends CalcShapeGenerator  {
 *	@param  string 	character using to paint the shape  
 *	@return self
 */
-    protected function generateLine($n, &$matrix ,$char = "*"){
+    protected function generateLine($n, &$matrix ){
 	   $length = $this->geo["x"];
 	   $patternWidth = $this->calculateLength($n + 1);
 	   $offset = ($length - $patternWidth)/ 2;
 	   for ($i = $offset; $i <  ($length - $offset); $i++){
-	        $matrix[$n][$i] = $char;
+	        $matrix[$n][$i] = $this->char;
 	   }
 	   return $this;
     }

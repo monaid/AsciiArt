@@ -8,14 +8,6 @@ use  \monaid\AsciiArt\Matrix;
 class CalcShapeGeneratorTest extends PHPUnit_Framework_TestCase {
 
 
-/*	list ($x, $y) =  $this->normalize($x, $y);
- 	if (isset ($this->cache[$x . "/" . $y])) return $this->cache[$x . "/" . $y];
-	$matrix = new Matrix\Matrix($x, $y);     
-	for ($n  = (0 + $this->offestTop); $n < ($y - $this->offestBottom); $n++) {
-	  $this->generateLine($n, $matrix);
-	}
-	$this->correctFields($matrix);
-	return  $this->cache[$x . "/" . $y] = $matrix;*/
     protected static $offestTop;
     protected static $offestBottom;
     protected static $cache;
@@ -36,6 +28,7 @@ class CalcShapeGeneratorTest extends PHPUnit_Framework_TestCase {
        }
 /**
 *   @dataProvider CompileDataProvider
+*   @covers 	\monaid\AsciiArt\ShapeGenerators\CalcShapeGenerator::compile
 */
     public function testCompileReturnsMatrix($x, $y){
 	  $method = self::$reflection->getMethod('compile');	
@@ -44,23 +37,42 @@ class CalcShapeGeneratorTest extends PHPUnit_Framework_TestCase {
    
 /**
 *   @dataProvider CompileDataProvider
+*   @covers 	\monaid\AsciiArt\ShapeGenerators\CalcShapeGenerator::compile
 */    
-    public function  so_bad_no_testCompileReturnsCorrectMatrixLength(){
+    public function  testCompileReturnsCorrectMatrixLength($x, $y){
     
- 	  $matrix = new Matrix\Matrix(7, 5);
- 	  self::$mock->method('normalize');
+ 	  self::$mock->method('normalize')->will($this->returnValue([$x, $y]));
  	  $method = self::$reflection->getMethod('compile');
-	  $method->invoke(self::$mock, 7, 5);
-/**	
-*		// only constructor of parent calss Matrix\MatrixElement is called :((((
-*	  $this->assertEquals($matrix, $method->invoke(self::$mock, $x, $y));   
-*/
+ 	  $this->assertEquals($method->invoke(self::$mock, NULL, $y)->dump()->count(), $y);
     }
+    
 /**
+*   @dataProvider CompileDataProvider
+*   @covers 	\monaid\AsciiArt\ShapeGenerators\CalcShapeGenerator::compile
+*/    
+        public function  testCompileReturnsCorrectElements($x, $y){
+     	  self::$mock->method('normalize')->will($this->returnValue([$x, $y]));
+ 	  $method = self::$reflection->getMethod('compile');
+ 	  $this->assertInstanceOf('\monaid\AsciiArt\Matrix\MatrixColoumn', $method->invoke(self::$mock, NULL, $y)[0]);
+    }
+    
+/**
+*   @dataProvider CompileDataProvider
+*   @covers 	\monaid\AsciiArt\ShapeGenerators\CalcShapeGenerator::compile
+*/    
+        public function  testCompileReturnsCorrectElementsLength($x, $y){
+     	  self::$mock->method('normalize')->will($this->returnValue([$x, $y]));
+ 	  $method = self::$reflection->getMethod('compile');
+ 	   $this->assertEquals($method->invoke(self::$mock, NULL, $y)[0]->dump()->count(), $x);
+    }   
+    
+/**
+*	may useless ?
 */    
      public function CompileDataProvider(){
 	  return [
-	      [7, 5]
+	     [7, 5],
+	     
      
 	  ];
      }	
