@@ -43,13 +43,14 @@ class ResponsiveChristmasStar extends ChristmasStar {
 /**
 *	@param  \monaid\AsciiArt\Matrix\Matrix
 */
-    protected function correctFields(&$matrix){
+    protected function correctFields($matrix){
 	 if ($this->geo["y"] === 11) {
  	       $matrix[1][8] = $matrix[9][8] = "*";
 	  }
 	  $matrix[0][round($this->geo["x"] / 2) -1] = "+";
           $matrix[$this->geo["y"] -1][round($this->geo["x"] / 2) -1] = "+";
           $matrix[$this->geo["y"]/2 ][0] = $matrix[$this->geo["y"]/2 ][$this->geo["x"] -1]  = "+" ;
+          return $matrix;
     }
     
   

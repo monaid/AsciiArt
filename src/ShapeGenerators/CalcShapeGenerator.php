@@ -7,8 +7,8 @@ abstract class CalcShapeGenerator extends  BaseShapeGenerator{
 
     abstract protected function getWidth($y);
     abstract protected function getHeight($x);
-    abstract protected function generateLine($n, &$matrix);
-    abstract protected function correctFields(&$matrix);
+    abstract protected function generateLine($n, $coloumn);
+    abstract protected function correctFields($matrix);
 
 /**
 *	@protected string  $char
@@ -33,11 +33,14 @@ abstract class CalcShapeGenerator extends  BaseShapeGenerator{
   
 	list ($x, $y) =  $this->normalize($x, $y);
  	if (isset ($this->cache[$x . "/" . $y])) return $this->cache[$x . "/" . $y];
-	$matrix = new Matrix\Matrix($x, $y);     
+ 	$matrix = new Matrix\Matrix($x, $y);     
 	for ($n  = (0 + $this->offestTop); $n < ($y - $this->offestBottom); $n++) {
-	  $this->generateLine($n, $matrix);
+	
+	// this is bad as bad can be ?
+	// liked passbyreference more but it more stressig to test, even not possible ? 
+	  $matrix[$n] = $this->generateLine($n, $matrix[$n]);
 	}
-	$this->correctFields($matrix);
+	$matrix = $this->correctFields($matrix);
 	return  $this->cache[$x . "/" . $y] = $matrix;
     }  
     

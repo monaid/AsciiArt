@@ -3,7 +3,7 @@
 
 use \PHPUnit\Framework\TestCase;
 use \monaid\AsciiArt\ShapeGenerators;
-
+use \monaid\AsciiArt\Matrix;
 class ChristmasTreeTest extends PHPUnit_Framework_TestCase {
 
 /**
@@ -62,6 +62,41 @@ class ChristmasTreeTest extends PHPUnit_Framework_TestCase {
       }
 
 /**
+*	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasTree::correctFields
+*	@dataProvider 	christmasTreeCorrectFieldsProvider
+*/
+      public function testCorrrectFields($x, $y, $c){
+      	  $matrix = new Matrix\Matrix($x, $y);
+      	  $method = self::$reflection->getMethod('correctFields');
+	  $method->setAccessible(true);
+       	  $geo = self::$reflection->getProperty('geo');
+ 	  $geo->setAccessible(true);
+    	  $geo->setValue(self::$christmasTree,["x" =>$x, "y" => $y]);
+       	  $this->assertEquals($method->invoke(self::$christmasTree, $matrix)[0][$c], "+");
+
+      }
+/**
+*	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasTree::generateLine
+*	@dataProvider christmasTreeGenerateLineProvider
+*	
+*/   
+    public function testGenerateLine($gx, $y, $l) {
+    
+	  $coloumn = new Matrix\MatrixColoumn($gx);
+	  $geo = self::$reflection->getProperty('geo');
+	  $geo->setAccessible(true);
+	  $geo->setValue(self::$christmasTree,["x" => $gx, "y" => NULL]);
+	  $method = self::$reflection->getMethod('generateLine');
+	  $method->setAccessible(true);
+	  
+	  $this->assertEquals(
+	      count(array_filter(
+		  $method->invoke(self::$christmasTree, $y, $coloumn)->dump()->toArray(),
+		    function($c){if ($c === "*") return $c;})), 
+	      $l);
+    }
+      
+/**
 *	Dataproviders
 */
       
@@ -76,6 +111,17 @@ class ChristmasTreeTest extends PHPUnit_Framework_TestCase {
 		[19, 11]
  	      ];
       }
+/**
+*	Correct Fileds dataProvider
+*/
+      public function christmasTreeCorrectFieldsProvider(){
+      	    return [
+		[7, 5, 3],
+		[11, 7, 5],
+		[19, 11, 9]
+ 	      ];      
+        }
+      
       
 /**
 *	Provides data for calculateLength 
@@ -93,5 +139,35 @@ class ChristmasTreeTest extends PHPUnit_Framework_TestCase {
 		[19, 11]
  	      ];
       }
-      
+/**
+*	data for generateLine
+*/
+        public function christmasTreeGenerateLineProvider() {
+        
+	  return [
+	   [7, 1, 1],
+	   [7, 2, 3],
+	   [7, 3, 5],
+	   [7, 4, 7],
+	   [11, 1, 1],
+	   [11, 2, 3],
+	   [11, 3, 5],
+	   [11, 4, 7],
+	   [11, 5, 9],
+	   [11, 6, 11],
+	   [19, 1, 1],
+	   [19, 2, 3],
+	   [19, 3, 5],
+	   [19, 4, 7],
+	   [19, 5, 9],
+	   [19, 6, 11],
+	   [19, 7, 13],
+	   [19, 8, 15],
+	   [19, 9, 17],
+	   [19, 10, 19],
+	  ];
+        
+        
+        
+        }
 }      

@@ -3,7 +3,7 @@
 
 use \PHPUnit\Framework\TestCase;
 use \monaid\AsciiArt\ShapeGenerators;
-
+use \monaid\AsciiArt\Matrix;
 class ChristmasStarTest extends PHPUnit_Framework_TestCase {
 
 
@@ -77,8 +77,41 @@ class ChristmasStarTest extends PHPUnit_Framework_TestCase {
 	    $method->setAccessible(true);	    
 	    $this->assertEquals($method->invoke(self::$christmasStar, $y), $x);
       }
-
+/**
+*	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasStar::correctFields
+*	@dataProvider 	christmasStarCorrectFieldsProvider
+*/
+      public function testCorrrectFields($x, $y, $ex, $ey){
+      	  $matrix = new Matrix\Matrix($x, $y);
+      	  $method = self::$reflection->getMethod('correctFields');
+	  $method->setAccessible(true);
+       	  $geo = self::$reflection->getProperty('geo');
+ 	  $geo->setAccessible(true);
+    	  $geo->setValue(self::$christmasStar,["x" =>$x, "y" => $y]);
+       	  $this->assertEquals($method->invoke(self::$christmasStar, $matrix)[$ey][$ex], "+");
+      }
       
+/**
+*	@covers \monaid\AsciiArt\ShapeGenerators\ChristmasStar::generateLine
+*	@dataProvider christmasStarGenerateLineProvider
+*	
+*/   
+    public function testGenerateLine($gx, $gy, $y, $l) {
+    
+	  $coloumn = new Matrix\MatrixColoumn($gx);
+	  $geo = self::$reflection->getProperty('geo');
+	  $geo->setAccessible(true);
+	  $geo->setValue(self::$christmasStar, ["x" => $gx, "y" => $gy]);
+	  $method = self::$reflection->getMethod('generateLine');
+	  $method->setAccessible(true);
+	  
+	  $this->assertEquals(
+	      count(array_filter(
+		  $method->invoke(self::$christmasStar, $y, $coloumn)->dump()->toArray(),
+		    function($c){if ($c === "*") return $c;})), 
+	      $l);
+    }
+           
 /**
 *	Provides data for testGetHeight and testGetWidth	
 *	
@@ -116,7 +149,60 @@ class ChristmasStarTest extends PHPUnit_Framework_TestCase {
 			[19, 11, 1, 10]
  	      ];
       }
-
-
-
+/**
+*	correctFields data Provider
+*	
+*/
+      
+    public function christmasStarCorrectFieldsProvider() {
+    	    return [
+		[7, 5, 3, 0],
+		[7, 5, 3, 4],
+		[7, 5, 0, 2],
+		[7, 5, 6, 2],
+		
+		[11, 7, 5, 0],
+		[11, 7, 5, 6],
+		[11, 7, 0, 3],
+		[11, 7, 10, 3],
+		
+		[19, 11, 9, 0],
+		[19, 11, 9, 10],
+		[19, 11, 0, 5],
+		[19, 11, 18, 5],
+	    ];
+    
+    
+    }
+/**
+*	data for generateLine
+*/
+        public function christmasStarGenerateLineProvider() {
+        
+	  return [
+	   [7, 5, 1, 1],
+	   [7, 5, 2, 5],
+	   [7, 5, 3, 1],
+	   [7, 5, 4, 0],
+	   [11, 7, 1, 1],
+	   [11, 7, 2, 5],
+	   [11, 7, 3, 9],
+	   [11, 7, 4, 5],
+	   [11, 7, 9, 0],
+	   [19, 11, 1, 1],
+	   [19, 11, 2, 5],
+	   [19, 11, 3, 9],
+	   [19, 11, 4, 13],
+	   [19, 11, 5, 17],
+	   [19, 11, 6, 13],
+	   [19, 11, 7, 9],
+	   [19, 11, 8, 5],
+	   [19, 11, 9, 1],
+	   [19, 11, 11,0 ]
+	  
+	  ];
+        
+        
+        
+        }
 }
