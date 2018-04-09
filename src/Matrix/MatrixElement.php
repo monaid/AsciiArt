@@ -43,8 +43,9 @@ abstract class MatrixElement implements \ArrayAccess {
 */
     public function offsetSet($offset, $value) {
 	if (is_null($offset)) {
-	    throw new Ascii\Exceptions\MatrixValueException("can't set a Matrix value, when Key ist unset"); 
+	    throw new Ascii\Exceptions\MatrixKeyNotValideException("can't set a Matrix value, when Key ist unset"); 
         }else { 
+	   if (!is_numeric($offset))   throw new  Ascii\Exceptions\MatrixKeyNotValideException("the key " .$offset. " is not numeric");
 	    if ($this->validateValue($value)) {
 		  try{
 		      $this->data[$offset] = $value;
